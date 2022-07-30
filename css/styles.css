@@ -1,22 +1,28 @@
 :root {
   --primary-font: "Roboto", sans-serif;
   --secondary-font: "Raleway", sans-serif;
-  --prymary-bg-color: #ffffff;
+
+  --speed-animation: 250ms;
+
   --primary-color: #757575;
   --primari-logo-color: #000000;
   --primari-social-color: #afb1b8;
   --secondary-social-color: #ffffff;
+  --bold-color: #212121;
+  --white-color: #ffffff;
+  --footer-color-contact: rgba(255, 255, 255, 0.6);
+
   --scry-sc-darck-tm-bg: rgba(255, 255, 255, 0.1);
   --secondary-bg-color: #2f303a;
   --commands-bg-color: #f5f4fa;
   --bg-botton: #f5f4fa;
   --cards-bg-color: #eeeeee;
-  --bold-color: #212121;
-  --white-color: #ffffff;
+  --prymary-bg-color: #ffffff;
   --accent-color: #2196f3;
-  --footer-color-contact: rgba(255, 255, 255, 0.6);
   --hover-btn: #188ce8;
   --header-bottom-border-color: #ececec;
+  --cards-bg-hover-img: rgba(33, 150, 243, 0.9);
+  --modal-backdrop: rgba(0, 0, 0, 0.2);
 }
 body {
   margin: 0 auto;
@@ -102,6 +108,9 @@ button:focus-visible {
 .logo-web {
   color: var(--accent-color);
 }
+.menu-link {
+  position: relative;
+}
 .menu.list {
   display: flex;
 }
@@ -121,6 +130,22 @@ button:focus-visible {
 .menu .link:focus {
   color: var(--accent-color);
 }
+.menu-link::after {
+  content: "";
+  border-radius: 50px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  display: block;
+  width: 100%;
+  height: 5px;
+  background-color: var(--accent-color);
+  opacity: 0;
+}
+/* .menu-link:hover::after {
+  opacity: 1;
+  transition: opacity var(--speed-animation) cubic-bezier(0, 4, 0, 0, 2, 1);
+} */
 .contact.list {
   display: flex;
   margin-right: 0;
@@ -194,6 +219,57 @@ button:focus-visible {
 .hero-btn:focus {
   background-color: var(--hover-btn);
 }
+
+.data-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  background-color: var(--modal-backdrop);
+}
+
+.data-modal.is-hidden {
+  visibility: visible;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 528px;
+  height: 581px;
+  border-radius: 3px;
+
+  background-color: var(--prymary-bg-color);
+}
+
+.data-modal-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+
+  border-color: rgba(0, 0, 0, 0.1);
+  background-color: transparent;
+  cursor: pointer;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
+    0px 2px 1px rgba(0, 0, 0, 0.2);
+}
+.modal-svg {
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+
 /* ======================= /HERO ======================= */
 /* ====================== FEATURES ===================== */
 .features-title {
@@ -251,10 +327,28 @@ button:focus-visible {
   display: flex;
 }
 .doing-item {
+  position: relative;
   width: calc((100% - 60px) / 3);
 }
 .doing-item:not(:last-child) {
   margin-right: 30px;
+}
+.doing-text {
+  position: absolute;
+  display: block;
+  bottom: 0;
+
+  width: 100%;
+  height: 70px;
+  padding: 27px 0;
+
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.14;
+  color: var(--white-color);
+  background-color: var(--secondary-bg-color);
 }
 /* ======================== /DOING ======================= */
 /* ======================== COMANDS ====================== */
@@ -484,6 +578,31 @@ button:focus-visible {
 .cards-link:focus {
   box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.06),
     1px 4px 6px rgba(0, 0, 0, 0.16);
+}
+.cards-container-img {
+  position: relative;
+  overflow: hidden;
+}
+.cards-text {
+  position: absolute;
+  top: 0;
+
+  width: 100%;
+  height: 100%;
+  padding: 63px 24px;
+  overflow: auto;
+  transform: translate(0, 100%);
+
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  font-size: 18px;
+  line-height: 1.56;
+  color: var(--white-color);
+  background-color: var(--cards-bg-hover-img);
+}
+.cards-link:hover .cards-text,
+.cards-link:focus .cards-text {
+  transform: translate(0, 0);
 }
 .cards-list-tile {
   margin-bottom: 4px;
